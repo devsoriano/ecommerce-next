@@ -4,16 +4,18 @@ import {
   Menu as MenuWeb,
   Grid,
   Icon,
-  Label,
   GridColumn,
 } from "semantic-ui-react";
 import Link from "next/link";
 import BasicModal from "../../Modal/BasicModal/BasicModal";
+import Auth from "../../Auth";
 
 export default function Menu() {
   const [showModal, setShowModal] = useState(false);
+  const [titleModal, setTitleModal] = useState("Iniciar sesión");
 
   const onShowModal = () => setShowModal(true);
+  const onCloseModal = () => setShowModal(false);
 
   return (
     <div className="menu">
@@ -30,10 +32,10 @@ export default function Menu() {
       <BasicModal
         show={showModal}
         setShow={setShowModal}
-        title="Inicia sesión"
+        title={titleModal}
         size="small"
       >
-        Contenido del Modal
+        <Auth onCloseModal={onCloseModal} setTitleModal={setTitleModal} />
       </BasicModal>
     </div>
   );
