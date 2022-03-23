@@ -23,3 +23,16 @@ export async function loginApi(formData) {
     return null;
   }
 }
+
+//TODO: implementar plugin
+export async function resetPasswordApi(email) {
+  try {
+    const response = await axios.post(`${BASE_PATH}/auth/forgot-password`, {
+      email,
+    });
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+}
