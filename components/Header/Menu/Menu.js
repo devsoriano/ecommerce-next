@@ -9,10 +9,12 @@ import {
 import Link from "next/link";
 import BasicModal from "../../Modal/BasicModal/BasicModal";
 import Auth from "../../Auth";
+import useAuth from "../../../hooks/useAuth";
 
 export default function Menu() {
   const [showModal, setShowModal] = useState(false);
   const [titleModal, setTitleModal] = useState("Iniciar sesión");
+  const { auth, logout } = useAuth();
 
   const onShowModal = () => setShowModal(true);
   const onCloseModal = () => setShowModal(false);
@@ -25,7 +27,11 @@ export default function Menu() {
             <MenuPlatforms />
           </Grid.Column>
           <GridColumn className="menu__right" width={10}>
-            <MenuOptions onShowModal={onShowModal} />
+            {auth ? (
+              <button onClick={logout}>Cerrar sesión</button>
+            ) : (
+              <MenuOptions onShowModal={onShowModal} />
+            )}
           </GridColumn>
         </Grid>
       </Container>
