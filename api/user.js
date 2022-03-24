@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASE_PATH } from "../utils/constants";
+import { authFetch } from "../utils/fetch";
 
 export async function registerApi(formData) {
   try {
@@ -9,7 +10,6 @@ export async function registerApi(formData) {
     );
     return response.data;
   } catch (err) {
-    console.log(err);
     return null;
   }
 }
@@ -19,7 +19,6 @@ export async function loginApi(formData) {
     const response = await axios.post(`${BASE_PATH}/auth/local`, formData);
     return response.data;
   } catch (err) {
-    console.log(err);
     return null;
   }
 }
@@ -32,7 +31,16 @@ export async function resetPasswordApi(email) {
     });
     return response.data;
   } catch (err) {
-    console.log(err);
+    return null;
+  }
+}
+
+export async function getMeApi(logout) {
+  try {
+    const url = `${BASE_PATH}/users/me`;
+    const result = await authFetch(url, null, logout);
+    return result ? result : null;
+  } catch (error) {
     return null;
   }
 }

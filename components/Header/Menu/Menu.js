@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Menu as MenuWeb,
@@ -10,11 +10,20 @@ import Link from "next/link";
 import BasicModal from "../../Modal/BasicModal/BasicModal";
 import Auth from "../../Auth";
 import useAuth from "../../../hooks/useAuth";
+import { getMeApi } from "../../../api/user";
 
 export default function Menu() {
   const [showModal, setShowModal] = useState(false);
   const [titleModal, setTitleModal] = useState("Iniciar sesión");
+  const [user, setUser] = useState(undefined);
   const { auth, logout } = useAuth();
+
+  useEffect(() => {
+    (async () => {
+      const response = await getMeApi(logout);
+      setUser(response);
+    })();
+  }, [auth]);
 
   const onShowModal = () => setShowModal(true);
   const onCloseModal = () => setShowModal(false);
@@ -27,10 +36,12 @@ export default function Menu() {
             <MenuPlatforms />
           </Grid.Column>
           <GridColumn className="menu__right" width={10}>
-            {auth ? (
-              <button onClick={logout}>Cerrar sesión</button>
-            ) : (
-              <MenuOptions onShowModal={onShowModal} />
+            {user !== undefined && (
+              <MenuOptions
+                onShowModal={onShowModal}
+                user={user}
+                logout={logout}
+              />
             )}
           </GridColumn>
         </Grid>
@@ -63,13 +74,17 @@ function MenuPlatforms() {
   );
 }
 
-function MenuOptions({ onShowModal }) {
+function MenuOptions({ onShowModal, user, logout }) {
   return (
     <MenuWeb>
-      <MenuWeb.Item onClick={onShowModal}>
-        <Icon name="user outline" />
-        Mi cuenta
-      </MenuWeb.Item>
+      {user ? (
+        <MenuWeb.Item onClick={logout}>Cerrar sesión</MenuWeb.Item>
+      ) : (
+        <MenuWeb.Item onClick={onShowModal}>
+          <Icon name="user outline" />
+          Mi cuenta
+        </MenuWeb.Item>
+      )}
     </MenuWeb>
   );
 }
