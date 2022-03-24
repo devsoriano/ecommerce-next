@@ -78,7 +78,34 @@ function MenuOptions({ onShowModal, user, logout }) {
   return (
     <MenuWeb>
       {user ? (
-        <MenuWeb.Item onClick={logout}>Cerrar sesión</MenuWeb.Item>
+        <>
+          <Link href="/orders">
+            <MenuWeb.Item as="a">
+              <Icon name="game" />
+              Mis pedidos
+            </MenuWeb.Item>
+          </Link>
+          <Link href="/wishlist">
+            <MenuWeb.Item as="a">
+              <Icon name="heart outline" />
+              Wishlist
+            </MenuWeb.Item>
+          </Link>
+          <Link href="/account">
+            <MenuWeb.Item as="a">
+              <Icon name="user outline" />
+              {user.name} {user.lastname}
+            </MenuWeb.Item>
+          </Link>
+          <Link href="/cart">
+            <MenuWeb.Item as="a" className="m-0">
+              <Icon name="cart" />
+            </MenuWeb.Item>
+          </Link>
+          <MenuWeb.Item onClick={logout} className="m-0">
+            <Icon name="power off" />
+          </MenuWeb.Item>
+        </>
       ) : (
         <MenuWeb.Item onClick={onShowModal}>
           <Icon name="user outline" />
