@@ -4,6 +4,7 @@ import { getMeApi } from "../api/user";
 import useAuth from "../hooks/useAuth";
 import BasicLayout from "../layouts/BasicLayout";
 import ChangeNameForm from "../components/Account/ChangeNameForm";
+import ChangeEmailForm from "../components/Account/ChangeEmailForm/ChangeEmailForm";
 
 export default function Account() {
   const [user, setUser] = useState(undefined);
@@ -37,6 +38,7 @@ function Configuracion({ user, logout, setReloadUser }) {
       <div className="title">Configuración</div>
       <div className="data">
         <ChangeNameForm {...{ user }} {...{ logout }} {...{ setReloadUser }} />
+        <ChangeEmailForm {...{ user }} {...{ logout }} {...{ setReloadUser }} />
       </div>
     </div>
   );
