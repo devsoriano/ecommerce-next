@@ -29,6 +29,7 @@ export default function Account() {
   return (
     <BasicLayout className="account">
       <Configuracion {...{ user }} {...{ logout }} {...{ setReloadUser }} />
+      <Address />
     </BasicLayout>
   );
 }
@@ -42,6 +43,14 @@ function Configuracion({ user, logout, setReloadUser }) {
         <ChangeEmailForm {...{ user }} {...{ logout }} {...{ setReloadUser }} />
         <ChangePasswordForm {...{ user }} {...{ logout }} />
       </div>
+    </div>
+  );
+}
+
+function Address() {
+  return (
+    <div className="account__address">
+      <div className="title">Direcciones</div>
     </div>
   );
 }

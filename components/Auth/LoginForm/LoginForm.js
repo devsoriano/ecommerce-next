@@ -58,7 +58,7 @@ export default function LoginForm({ showRegisterForm, onCloseModal }) {
           Registrarse
         </Button>
         <div>
-          <Button className="submit" type="submit" loading={loading}>
+          <Button className="submit" type="submit" {...{ loading }}>
             Entrar
           </Button>
           <Button type="button" onClick={resetPassword}>

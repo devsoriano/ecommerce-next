@@ -16,11 +16,8 @@ export default function Auth({ onCloseModal, setTitleModal }) {
   };
 
   return showLogin ? (
-    <LoginForm
-      showRegisterForm={showRegisterForm}
-      onCloseModal={onCloseModal}
-    />
+    <LoginForm {...{ showRegisterForm }} {...{ onCloseModal }} />
   ) : (
-    <RegisterForm showLoginForm={showLoginForm} />
+    <RegisterForm {...{ showLoginForm }} />
   );
 }

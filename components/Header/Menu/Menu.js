@@ -37,11 +37,7 @@ export default function Menu() {
           </Grid.Column>
           <GridColumn className="menu__right" width={10}>
             {user !== undefined && (
-              <MenuOptions
-                onShowModal={onShowModal}
-                user={user}
-                logout={logout}
-              />
+              <MenuOptions {...{ onShowModal }} {...{ user }} {...{ logout }} />
             )}
           </GridColumn>
         </Grid>
@@ -52,7 +48,7 @@ export default function Menu() {
         title={titleModal}
         size="small"
       >
-        <Auth onCloseModal={onCloseModal} setTitleModal={setTitleModal} />
+        <Auth {...{ onCloseModal }} {...{ setTitleModal }} />
       </BasicModal>
     </div>
   );
